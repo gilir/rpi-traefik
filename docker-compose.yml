@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  traefik:
+    image: gilir/rpi-traefik:1.2.1
+    container_name: proxy
+    command: --web --docker --docker.domain=lavergne.online  --logLevel=DEBUG --acme --acme.email=julien@lavergne.online --acme.storage=/etc/traefik/acme.json --acme.entrypoint=https --acme.caserver='https://acme-v01.api.letsencrypt.org/directory' --acme.ondemand=true --entryPoints='Name:https Address::443 TLS' --entryPoints='Name:http Address::80 Redirect.EntryPoint:https' --defaultentrypoints=http,https
+    restart: always
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+      - traefik_ssl:/etc/traefik/ssl
+      - traefik_acme:/etc/traefik/acme"
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external:
+      name: proxy-network
+
+volumes:
+  traefik_acme:
+    external: true
+  traefik_ssl:
+    external: true
