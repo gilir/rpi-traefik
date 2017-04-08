@@ -11,4 +11,4 @@ script:
 # build image
  - docker build -t gilir/rpi-traefik:build .
 # test image
- - docker run hypriot/rpi-traefik:build version
+ - docker run gilir/rpi-traefik:build version
