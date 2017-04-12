@@ -12,3 +12,22 @@ script:
  - docker build -t gilir/rpi-traefik:build .
 # test image
  - docker run gilir/rpi-traefik:build version
+# build image
+- docker build -t gilir/rpi-traefik:build .
+# test image
+- docker run gilir/rpi-traefik:build version
+# push image
+- export TAG=$(grep "ENV TRAEFIK_VERSION " Dockerfile | sed 's/[^0-9.]*//g')
+- >
+  if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+    docker tag gilir/rpi-traefik:build gilir/rpi-traefik:$TAG
+    docker tag gilir/rpi-traefik:build gilir/rpi-traefik:latest
+    docker push gilir/rpi-traefik:$TAG
+    docker push gilir/rpi-traefik:latest
+  else
+    if [ "$TRAVIS_BRANCH" == "$TAG" ]; then
+    docker tag gilir/rpi-traefik:build gilir/rpi-traefik:$TAG
+    docker push gilir/rpi-traefik:$TAG
+    fi
+  fi
