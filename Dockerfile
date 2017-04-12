@@ -1,4 +1,4 @@
-FROM gilir/rpi-alpine
+FROM gilir/rpi-alpine:3.5
 
 ENV TRAEFIK_VERSION 1.2.1
 
@@ -6,8 +6,9 @@ LABEL maintainer="Julien Lavergne <julien@lavergne.online>" alpine_version="3.5"
 
 ADD https://github.com/containous/traefik/releases/download/v${TRAEFIK_VERSION}/traefik_linux-arm /traefik
 
-RUN apk upgrade --no-cache &&\
-    apk add --no-cache ca-certificates
+RUN apk upgrade --no-cache && \
+    apk add --no-cache ca-certificates && \
+    rm -rf /var/cache/apk/*
 
 RUN chmod +x /traefik
 
