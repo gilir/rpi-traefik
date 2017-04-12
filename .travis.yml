@@ -9,10 +9,6 @@ script:
 - docker build -t gilir/rpi-traefik:build .
 # test image
 - docker run gilir/rpi-traefik:build version
-# build image
-- docker build -t gilir/rpi-traefik:build .
-# test image
-- docker run gilir/rpi-traefik:build version
 # push image
 - export TAG=$(grep "ENV TRAEFIK_VERSION " Dockerfile | sed 's/[^0-9.]*//g')
 - >
