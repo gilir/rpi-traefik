@@ -1,4 +1,4 @@
-FROM gilir/rpi-alpine:3.5
+FROM hypriot/rpi-alpine:3.5
 
 ENV TRAEFIK_VERSION 1.2.3
 
