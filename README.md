@@ -4,6 +4,6 @@
 
 Docker image for Traefik (https://github.com/containous/traefik), a reverse proxy and load balancer.
 
-This is image is ARM build, based on alpine.
+This is image is an ARM build, based on alpine.
 
 Based on Hypriot rpi-traefik (https://github.com/hypriot/rpi-traefik).
