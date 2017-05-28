@@ -4,17 +4,17 @@ services:
   traefik:
     image: gilir/rpi-traefik
     container_name: proxy
-    command: --web --docker --docker.domain=lavergne.online  --logLevel=DEBUG --acme --acme.email=julien@lavergne.online --acme.storage=/etc/traefik/acme.json --acme.entrypoint=https --acme.caserver='https://acme-v01.api.letsencrypt.org/directory' --acme.ondemand=true --entryPoints='Name:https Address::443 TLS' --entryPoints='Name:http Address::80 Redirect.EntryPoint:https' --defaultentrypoints=http,https
+    command: --web --docker --docker.domain=lavergne.online  --logLevel=DEBUG --checkNewVersion=false --acme --acme.email=julien@lavergne.online --acme.storage=/etc/traefik/acme/acme.json --acme.entrypoint=https --acme.ondemand='true' --acme.domains='lavergne.online,mastodon.lavergne.online,selfoss.lavergne.online,nextcloud.lavergne.online,blog.lavergne.online,isso.lavergne.online,wallabag.lavergne.online,gogs.lavergne.online,piwik.lavergne.online,grafana.lavergne.online' --entryPoints='Name:https Address::443 TLS' --entryPoints='Name:http Address::80 Redirect.EntryPoint:https' --defaultentrypoints=http,https
     restart: always
     ports:
-      - "80:80"
-      - "8080:8080"
-      - "443:443"
+      - 80:80
+      - 8080:8080
+      - 443:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /dev/null:/traefik.toml
       - traefik_ssl:/etc/traefik/ssl
-      - traefik_acme:/etc/traefik/acme"
+      - traefik_acme:/etc/traefik/acme
     networks:
       - proxy-network
 
