@@ -7,7 +7,7 @@ RUN apk --no-cache upgrade \
        su-exec \
        ca-certificates
 
-ARG TRAEFIK_VERSION=1.2.3
+ARG TRAEFIK_VERSION=1.3.0
 
 ADD https://github.com/containous/traefik/releases/download/v${TRAEFIK_VERSION}/traefik_linux-arm /traefik
 
