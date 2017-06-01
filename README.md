@@ -9,7 +9,7 @@
 Based on [Hypriot version](https://github.com/hypriot/rpi-traefik). See Tags for the versions available.
 
 ## Features
-- Alpine 3.5
+- Alpine 3.6
 
 ## How to use
 

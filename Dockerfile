@@ -1,4 +1,4 @@
-FROM armhf/alpine:3.5
+FROM arm32v6/alpine:3.6
 
 # Upgrating the image first, to have the last version of all packages, and to
 # share the same layer accros the images
@@ -18,7 +18,8 @@ LABEL description="Modern HTTP reverse proxy and load balancer" \
       traefik_version="${TRAEFIK_VERSION}" \
       original_maintainer_url="https://github.com/hypriot/rpi-traefik" \
       project_url="https://docs.traefik.io/" \
-      alpine_version="3.5"
+      alpine_version="3.6" \
+      architecture="arm32v6"
 
 EXPOSE 80 8080 443
 
