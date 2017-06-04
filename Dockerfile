@@ -7,11 +7,17 @@ RUN apk --no-cache upgrade \
        su-exec \
        ca-certificates
 
+ENV GID=991 \
+    UID=991
+
 ARG TRAEFIK_VERSION=1.3.0
 
-ADD https://github.com/containous/traefik/releases/download/v${TRAEFIK_VERSION}/traefik_linux-arm /traefik
+ADD https://github.com/containous/traefik/releases/download/v${TRAEFIK_VERSION}/traefik_linux-arm /usr/local/bin/traefik
 
-RUN chmod +x /traefik
+COPY run.sh /usr/local/bin/run.sh
+
+RUN chmod +x /usr/local/bin/traefik \
+ && chmod +x /usr/local/bin/run.sh
 
 LABEL description="Modern HTTP reverse proxy and load balancer" \
       maintainer="Julien Lavergne <julien@lavergne.online>" \
@@ -23,4 +29,4 @@ LABEL description="Modern HTTP reverse proxy and load balancer" \
 
 EXPOSE 80 8080 443
 
-ENTRYPOINT ["/traefik"]
+ENTRYPOINT ["/usr/local/bin/run.sh"]
