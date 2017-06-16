@@ -41,6 +41,9 @@ services:
       - /dev/null:/traefik.toml
       - traefik_ssl:/etc/traefik/ssl
       - traefik_acme:/etc/traefik/acme
+    environment:
+      - "GID=901"
+      - "UID=901"
     networks:
       - proxy-network
 
