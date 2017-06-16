@@ -10,7 +10,7 @@ RUN apk --no-cache upgrade \
 ENV GID=991 \
     UID=991
 
-ARG TRAEFIK_VERSION=1.3.0
+ARG TRAEFIK_VERSION=1.3.1
 
 ADD https://github.com/containous/traefik/releases/download/v${TRAEFIK_VERSION}/traefik_linux-arm /usr/local/bin/traefik
 
